@@ -72,6 +72,13 @@ describe('email confirmation (library methods)', () => {
 
             assert.strictEqual(pending, true);
         });
+
+        it('should return false when there no email associated with user', async () => {
+            const email = 'test@example.org';
+            const emailAssociated = await user.email.exists(email);
+
+            assert.strictEqual(emailAssociated, false);
+        });
     });
 
     describe('getValidationExpiry', () => {
