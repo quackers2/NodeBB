@@ -79,6 +79,19 @@ describe('email confirmation (library methods)', () => {
 
             assert.strictEqual(emailAssociated, false);
         });
+
+        it('should return true if no validation pending', async () => {
+            const canSend = await user.email.canSendValidation(uid, 'test@example.com');
+
+            assert(canSend);
+        });
+
+        it('should take email as second option', async () => {
+            await user.email.sendValidationEmail(uid, 'test@example.com');
+            const sent = await user.email.isValidationPending(uid);
+
+            assert(sent);
+        });
     });
 
     describe('getValidationExpiry', () => {
